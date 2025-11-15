@@ -1,0 +1,13 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Rendered SQL files (optional - uncomment if you want to ignore rendered files)
+# Penguin/*_rendered.sql
+

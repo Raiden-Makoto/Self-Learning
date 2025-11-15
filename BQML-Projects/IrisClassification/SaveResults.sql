@@ -1,0 +1,6 @@
+CREATE OR REPLACE TABLE `${PROJECT_ID}.${IRIS_DATASET}.predictions_validation` AS
+SELECT
+  *
+FROM ML.PREDICT(MODEL `${PROJECT_ID}.${IRIS_DATASET}.decision_tree`,
+  (SELECT * FROM `${PROJECT_ID}.${IRIS_DATASET}.iris`
+   WHERE split_group = 'VALIDATION'));

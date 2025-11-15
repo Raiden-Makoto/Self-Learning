@@ -1,0 +1,46 @@
+# Build directories
+build/
+build-static/
+
+# Raylib source (can be rebuilt)
+raylib/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled binaries
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+!CMakeLists.txt
+!CMakeListsWeb.txt
+
+# Compiled game
+snake
+snake_web.html
+
+# Logs
+*.log

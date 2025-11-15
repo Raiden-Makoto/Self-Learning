@@ -1,0 +1,8 @@
+CREATE OR REPLACE TABLE `${PROJECT_ID}.${IRIS_DATASET}.iris` AS
+SELECT
+  *,
+  CASE
+    WHEN MOD(ABS(FARM_FINGERPRINT(CAST(ROW_NUMBER() OVER() AS STRING))), 100) < 80 THEN 'TRAIN'
+    ELSE 'VALIDATION'
+  END AS split_group
+FROM `bigquery-public-data.ml_datasets.iris`;
