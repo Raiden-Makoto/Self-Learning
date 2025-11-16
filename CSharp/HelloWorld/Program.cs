@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Text.Json;
 
 /*
 16 Segment Display:
@@ -14,11 +16,40 @@ namespace HelloWorld
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            var display = new SegmentDisplay16();
-            string text = "0123456789";
-            display.DisplayText(text);
+            // Segment Display (commented out)
+            // var display = new SegmentDisplay16();
+            // string text = "0123456789";
+            // display.DisplayText(text);
+
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Usage: dotnet run <stop_id>");
+                Console.WriteLine("Example: dotnet run 12345");
+                return;
+            }
+
+            string stopId = args[0];
+            var apiService = new TransseeApiService();
+            
+            var result = await apiService.GetStopInfoAsync(stopId);
+
+            if (result != null)
+            {
+                // Dump the entire response as JSON
+                var json = JsonSerializer.Serialize(result, new JsonSerializerOptions 
+                { 
+                    WriteIndented = true 
+                });
+                Console.WriteLine(json);
+            }
+            else
+            {
+                Console.WriteLine("Failed to get data from API.");
+            }
+
+            apiService.Dispose();
         }
     }
 
