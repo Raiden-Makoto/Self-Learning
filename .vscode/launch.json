@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET: Launch console app",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "dotnet: build",
+      "program": "${workspaceFolder}/${input:dotnetLaunchDll}",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopAtEntry": false,
+      "justMyCode": true,
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": ".NET: Attach to process",
+      "type": "coreclr",
+      "request": "attach"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "dotnetLaunchDll",
+      "type": "promptString",
+      "description": "Relative path to the DLL you want to launch (e.g. bin/Debug/net8.0/App.dll)",
+      "default": "bin/Debug/net8.0/App.dll"
+    }
+  ]
+}
+

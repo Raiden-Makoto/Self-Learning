@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dotnet: restore",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "restore"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "dotnet: build",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "dependsOn": "dotnet: restore"
+    },
+    {
+      "label": "dotnet: test",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "--no-build",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": "$msCompile",
+      "dependsOn": "dotnet: build"
+    },
+    {
+      "label": "dotnet: watch",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "watch",
+        "run"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": "$msCompile",
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}
+

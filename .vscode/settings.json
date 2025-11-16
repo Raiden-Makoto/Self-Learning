@@ -1,0 +1,34 @@
+{
+  "csharp.suppressDotnetRestoreNotification": true,
+  "csharp.semanticHighlighting.enabled": true,
+  "csharp.inlayHints.parameters.enabled": true,
+  "csharp.inlayHints.types.enabled": true,
+  "csharp.testing.defaultTestProjectPath": "${workspaceFolder}",
+  "csharp.lsp.roslynExtensionsOptions.enableAnalyzersSupport": true,
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always",
+      "source.organizeImports": "always"
+    }
+  },
+  "[cshtml]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp"
+  },
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/.vs": true
+  },
+  "dotnet.preferMajorVersion": "latestMajor",
+  "dotnet.completion.showCompletionItemsFromUnimportedNamespaces": true,
+  "dotnet.defaultGeneratedCodeStyle": "latest",
+  "dotnet.defaultSolution": "",
+  "dotnet.server.useOmnisharp": false,
+  "dotnet.test.captureOutput": true,
+  "dotnet.server.completion.enableCommitCharacters": true
+}
+{
+    "java.compile.nullAnalysis.mode": "automatic"
+}
