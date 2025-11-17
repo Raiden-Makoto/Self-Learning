@@ -273,7 +273,15 @@ namespace HelloWorld
                 "|   | ",
                 @"| _ | ",
                 @"\/ \/ "
-            }; // skip xyz we will never use those
+            }; // skip xz we will never use those
+
+            letters['y'] = new string[] {
+                @"\   / ",
+                @" \ /  ",
+                @"  |   ",
+                @"  |   ",
+                @"  |   "
+            };
             return letters;
         }
     }
