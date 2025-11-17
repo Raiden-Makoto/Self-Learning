@@ -1,40 +1,31 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Globalization;
 using System.Linq;
-
-/*
-16 Segment Display:
- _ _
-|\|/|
- - - 
-|/|\|
- - - 
-*/
+using DotNetEnv;
 
 namespace HelloWorld
 {
-    // DEPRECATED: Use ProgramText.cs instead
-    class ProgramDisplay
+    class Program
     {
-        // Main method removed - use ProgramText.cs instead
-        /*
         static async Task Main(string[] args)
         {
-            var display = new SegmentDisplay16();
+            // Load .env file
+            Env.Load();
+
             var apiService = new TransseeApiService();
 
-            // Define all stops and routes we need to check
+            // Read stop IDs from environment variables
             var stopConfigs = new List<StopConfig>
             {
-                new StopConfig { StopId = 5663, RouteNumber = "16", Message = "16 McCowan to STC in {0} min" },
-                new StopConfig { StopId = 5664, RouteNumber = "16", Message = "16 McCowan to Warden in {0} min" },
-                new StopConfig { StopId = 7694, RouteNumber = "95", Message = "95 York Mills to UTSC in {0} min" },
-                new StopConfig { StopId = 7694, RouteNumber = "995", Message = "995 York Mills to UTSC in {0} min" },
-                new StopConfig { StopId = 9604, RouteNumber = "38", Message = "38 Highland Creek to UTSC in {0} min" },
-                new StopConfig { StopId = 9604, RouteNumber = "133", Message = "133 Neilson to Neilson Rd in {0} min" }
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_16_NORTHBOUND") ?? "0"), RouteNumber = "16", Message = "16 McCowan to STC in {0} min" },
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_16_SOUTHBOUND") ?? "0"), RouteNumber = "16", Message = "16 McCowan to Warden in {0} min" },
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_MCCOWAN_EAST") ?? "0"), RouteNumber = "95", Message = "95 York Mills to UTSC in {0} min" },
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_MCCOWAN_EAST") ?? "0"), RouteNumber = "995", Message = "995 York Mills to UTSC in {0} min" },
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_MCCOWAN_WEST") ?? "0"), RouteNumber = "38", Message = "38 Highland Creek to UTSC in {0} min" },
+                new StopConfig { StopId = int.Parse(Environment.GetEnvironmentVariable("STOP_MCCOWAN_WEST") ?? "0"), RouteNumber = "133", Message = "133 Neilson to Neilson Rd in {0} min" }
             };
 
             // Group by stop ID to avoid duplicate API calls
@@ -91,52 +82,14 @@ namespace HelloWorld
                 }
             }
 
-            // Display all messages
+            // Display all messages as plain text
             foreach (var message in messages)
             {
-                display.DisplayText(message);
+                Console.WriteLine(message);
             }
 
             apiService.Dispose();
         }
-        */
-    }
-
-    class StopConfig
-    {
-        public int StopId { get; set; }
-        public string RouteNumber { get; set; } = "";
-        public string Message { get; set; } = "";
-    }
-
-    class SegmentDisplay16
-    {
-        private Dictionary<char, string[]> letters;
-
-        public SegmentDisplay16()
-        {
-            letters = SegmentDisplayLetters.GetLetters();
-        }
-
-        public void DisplayText(string text)
-        {
-            Console.WriteLine();
-            for (int row = 0; row < 5; row++)
-            {
-                foreach (char c in text.ToLower())
-                {
-                    if (letters.ContainsKey(c))
-                    {
-                        Console.Write(letters[c][row]);
-                    }
-                    else
-                    {
-                        Console.Write("     ");
-                    }
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }
     }
 }
+
