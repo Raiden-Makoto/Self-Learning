@@ -25,51 +25,6 @@ async function getStopInfo(stopId) {
     }
 }
 
-// Calculate time difference in minutes
-function calculateMinutes(actualTimeStr, now) {
-    // Parse the time string - could be "HH:MM:SS AM/PM" or "HH:MM AM/PM"
-    let timeStr = actualTimeStr.trim().toUpperCase();
-    const isPM = timeStr.includes('PM');
-    const isAM = timeStr.includes('AM');
-
-    // Remove AM/PM from the string
-    timeStr = timeStr.replace(/\s*(AM|PM)\s*/i, '');
-
-    const timeParts = timeStr.split(':');
-    let hours = parseInt(timeParts[0], 10);
-    const minutes = parseInt(timeParts[1] || 0, 10);
-    const seconds = parseInt(timeParts[2] || 0, 10);
-
-    // Convert to 24-hour format
-    if (isPM && hours !== 12) {
-        hours += 12;
-    } else if (isAM && hours === 12) {
-        hours = 0;
-    }
-
-    // Create a date for today with the parsed time
-    const today = new Date(now);
-    today.setHours(hours, minutes, seconds, 0);
-
-    // If the time is in the past, it means it's for tomorrow
-    if (today < now) {
-        today.setDate(today.getDate() + 1);
-    }
-
-    const diffMs = today - now;
-    const calculatedMinutes = Math.round(diffMs / (1000 * 60));
-
-    // If somehow we get a negative or very large value, clamp it
-    if (calculatedMinutes < 0) {
-        return 0;
-    }
-    if (calculatedMinutes > 1440) { // More than 24 hours seems wrong
-        console.warn(`Suspicious time calculation: ${calculatedMinutes} minutes for time ${actualTimeStr}`);
-    }
-
-    return calculatedMinutes;
-}
-
 // Get transit information
 async function getTransitInfo() {
     // Group by stop ID to avoid duplicate API calls
@@ -92,7 +47,6 @@ async function getTransitInfo() {
 
     const apiResults = await Promise.all(apiPromises);
     const routes = [];
-    const now = new Date();
 
     // Process all results
     apiResults.forEach(({ stopId, configs, result }) => {
@@ -100,10 +54,6 @@ async function getTransitInfo() {
             configs.forEach(config => {
                 const vehicle = result.vehicles.find(v => v.route === config.routeNumber);
                 if (vehicle && vehicle.actual) {
-                    console.log(`Route ${config.routeNumber}: actual time="${vehicle.actual}", current time="${now.toTimeString()}"`);
-                    const minutes = calculateMinutes(vehicle.actual, now);
-                    console.log(`Route ${config.routeNumber}: calculated ${minutes} minutes`);
-
                     // Parse the message to extract route number, route name and destination
                     // Format: "16 McCowan to Scarborough Centre Station in {0} min"
                     // Format: "995 York Mills Express to UTSC in {0} min"
@@ -119,7 +69,7 @@ async function getTransitInfo() {
                         routeNumber: routeNumber,
                         routeName: routeName,
                         destination: destination,
-                        minutes: minutes
+                        actualTime: vehicle.actual
                     });
                 }
             });
@@ -161,7 +111,7 @@ async function displayTransitInfo() {
                             <div class="transit-route">${route.routeNumber} ${route.routeName}</div>
                             <div class="transit-destination">${route.destination}</div>
                         </div>
-                        <div class="transit-time">${route.minutes} min</div>
+                        <div class="transit-time">${route.actualTime}</div>
                     </div>
                 </div>
             `;
