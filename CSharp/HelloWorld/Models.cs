@@ -19,5 +19,12 @@ namespace HelloWorld
         public string? Destination { get; set; }
         public string? Name { get; set; }
     }
+
+    public class StopConfig
+    {
+        public int StopId { get; set; }
+        public string RouteNumber { get; set; } = "";
+        public string Message { get; set; } = "";
+    }
 }
 

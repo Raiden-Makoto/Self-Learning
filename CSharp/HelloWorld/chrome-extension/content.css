@@ -1,0 +1,60 @@
+#transit-info-widget {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 450px;
+    height: 600px;
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 999999;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.widget-header {
+    background: #4a90e2;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 6px 6px 0 0;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+}
+
+.widget-header span {
+    font-weight: bold;
+}
+
+#transit-widget-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 4px;
+}
+
+#transit-widget-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.widget-content {
+    flex: 1;
+    overflow: hidden;
+    border-radius: 0 0 6px 6px;
+}
+
+#transit-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

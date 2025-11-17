@@ -1,0 +1,32 @@
+{
+    "manifest_version": 3,
+    "name": "Transit Info",
+    "version": "1.0",
+    "description": "Displays transit information",
+    "action": {
+        "default_title": "Toggle Transit Info"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://*/*",
+        "http://*/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "popup.html",
+                "transit.js",
+                "content.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ]
+}

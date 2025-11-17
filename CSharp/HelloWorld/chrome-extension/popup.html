@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transit Information</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #999;
+            display: none;
+        }
+
+        #error {
+            color: red;
+            padding: 20px;
+        }
+
+        #transit-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .transit-card {
+            border: 1px solid #999;
+            border-radius: 6px;
+            padding: 12px 16px;
+            position: relative;
+            min-height: 60px;
+        }
+
+        .transit-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .transit-card-left {
+            flex: 1;
+        }
+
+        .transit-route {
+            font-size: 16px;
+            font-weight: normal;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .transit-destination {
+            font-size: 14px;
+            color: #fff;
+            font-weight: normal;
+        }
+
+        .transit-time {
+            font-size: 16px;
+            color: #fff;
+            font-weight: normal;
+            margin-left: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading">Loading...</div>
+    <div id="error" style="display: none;"></div>
+    <div id="transit-info" style="display: none;"></div>
+    <script src="transit.js"></script>
+</body>
+
+</html>
