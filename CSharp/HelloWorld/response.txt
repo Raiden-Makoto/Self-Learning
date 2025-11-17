@@ -1,0 +1,58 @@
+{
+  "Stop": "5663",
+  "Routes": [
+    {
+      "branch": null,
+      "destination": "Scarborough Centre Stn",
+      "name": "16 McCowan"
+    },
+    {
+      "branch": null,
+      "destination": "Steeles",
+      "name": "302 Kingston Rd-McCowan"
+    }
+  ],
+  "Vehicles": [
+    {
+      "actual": "8:18:49PM",
+      "delay": "-7:28",
+      "destination": "North to Scarborough Centre Stn",
+      "direction": null,
+      "route": "16",
+      "scheduled": "8:12:52PM",
+      "vehicle_number": "8531"
+    },
+    {
+      "actual": "8:26:10PM",
+      "delay": "-4:24",
+      "destination": "North to Scarborough Centre Stn",
+      "direction": null,
+      "route": "16",
+      "scheduled": "8:24:52PM",
+      "vehicle_number": "8594"
+    },
+    {
+      "actual": "8:32:18PM",
+      "delay": "\u002B0:59",
+      "destination": "North to Scarborough Centre Stn",
+      "direction": null,
+      "route": "16",
+      "scheduled": "8:36:52PM",
+      "vehicle_number": "8589"
+    },
+    {
+      "actual": "8:47:08PM",
+      "delay": "-3:07",
+      "destination": "South to Warden Station",
+      "direction": null,
+      "route": "16",
+      "scheduled": "8:48:52PM",
+      "vehicle_number": "8610"
+    }
+  ]
+}
+
+find the first vehicle with routeNumber 16
+time = (actual - (current time)) rounded to nearest minute
+output = 16 McCowan to STC in {time} min
+display this info using the segmentdisplayletters

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Text.Json;
+using System.Globalization;
+using System.Linq;
 
 /*
 16 Segment Display:
@@ -18,38 +20,103 @@ namespace HelloWorld
     {
         static async Task Main(string[] args)
         {
-            // Segment Display (commented out)
             var display = new SegmentDisplay16();
-            string text = "LM";
-            display.DisplayText(text);
 
-            /*if (args.Length == 0)
-            {
-                Console.WriteLine("Usage: dotnet run <stop_id>");
-                Console.WriteLine("Example: dotnet run 12345");
-                return;
-            }
-
-            string stopId = args[0];
+            const int northbound16 = 5663;
+            const int southbound16 = 5664;
             var apiService = new TransseeApiService();
-            
-            var result = await apiService.GetStopInfoAsync(stopId);
+            var result = await apiService.GetStopInfoAsync(northbound16.ToString());
 
             if (result != null)
             {
-                // Dump the entire response as JSON
-                var json = JsonSerializer.Serialize(result, new JsonSerializerOptions 
-                { 
-                    WriteIndented = true 
+                // Parse vehicles array
+                var vehicles = JsonSerializer.Deserialize<List<Vehicle>>(result.Vehicles.GetRawText(), new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
                 });
-                Console.WriteLine(json);
+
+                // Find first vehicle with route "16"
+                var vehicle16 = vehicles?.FirstOrDefault(v => v.Route == "16");
+
+                if (vehicle16 != null && !string.IsNullOrEmpty(vehicle16.Actual))
+                {
+                    // Parse actual time (format: "8:18:49PM")
+                    if (DateTime.TryParse(vehicle16.Actual, out DateTime actualTime))
+                    {
+                        var now = DateTime.Now;
+                        var today = now.Date;
+                        
+                        // Set the date part to today
+                        actualTime = today.AddHours(actualTime.Hour).AddMinutes(actualTime.Minute).AddSeconds(actualTime.Second);
+                        
+                        // If the time is in the past, assume it's for tomorrow
+                        if (actualTime < now)
+                        {
+                            actualTime = actualTime.AddDays(1);
+                        }
+                        
+                        var timeDiff = actualTime - now;
+                        var minutes = (int)Math.Round(timeDiff.TotalMinutes);
+
+                        // Format: "16 McCowan to STC in {time} min"
+                        var output = $"16 McCowan to STC in {minutes} min";
+                        
+                        // Display using segment display
+                        display.DisplayText(output);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Failed to get data from API.");
+            }
+            // insert some whitespace
+            result = await apiService.GetStopInfoAsync(southbound16.ToString());
+            if (result != null)
+            {
+                // Parse vehicles array
+                var vehicles = JsonSerializer.Deserialize<List<Vehicle>>(result.Vehicles.GetRawText(), new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+                // Find first vehicle with route "16"
+                var vehicle16 = vehicles?.FirstOrDefault(v => v.Route == "16");
+
+                if (vehicle16 != null && !string.IsNullOrEmpty(vehicle16.Actual))
+                {
+                    // Parse actual time (format: "8:18:49PM")
+                    if (DateTime.TryParse(vehicle16.Actual, out DateTime actualTime))
+                    {
+                        var now = DateTime.Now;
+                        var today = now.Date;
+                        
+                        // Set the date part to today
+                        actualTime = today.AddHours(actualTime.Hour).AddMinutes(actualTime.Minute).AddSeconds(actualTime.Second);
+                        
+                        // If the time is in the past, assume it's for tomorrow
+                        if (actualTime < now)
+                        {
+                            actualTime = actualTime.AddDays(1);
+                        }
+                        
+                        var timeDiff = actualTime - now;
+                        var minutes = (int)Math.Round(timeDiff.TotalMinutes);
+
+                        // Format: "16 McCowan to STC in {time} min"
+                        var output = $"16 McCowan to Warden in {minutes} min";
+                        
+                        // Display using segment display
+                        display.DisplayText(output);
+                    }
+                }
             }
             else
             {
                 Console.WriteLine("Failed to get data from API.");
             }
 
-            apiService.Dispose();*/
+            apiService.Dispose();
         }
     }
 
