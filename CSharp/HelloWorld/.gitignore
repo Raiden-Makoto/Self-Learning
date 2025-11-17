@@ -1,6 +1,9 @@
 # Environment variables
 .env
 
+# Chrome extension config (contains sensitive stop IDs)
+chrome-extension/config.js
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/

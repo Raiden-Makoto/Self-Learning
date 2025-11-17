@@ -1,14 +1,6 @@
-// Stop configurations
-const stopConfigs = [
-    { stopId: 5663, routeNumber: "16", message: "16 McCowan to Scarborough Centre Station in {0} min" },
-    { stopId: 5664, routeNumber: "16", message: "16 McCowan to Warden Station in {0} min" },
-    { stopId: 7694, routeNumber: "95", message: "95 York Mills to Port Union Road in {0} min" },
-    { stopId: 7694, routeNumber: "995", message: "995 York Mills Express to UTSC in {0} min" },
-    { stopId: 9604, routeNumber: "38", message: "38 Highland Creek to UTSC in {0} min" },
-    { stopId: 9604, routeNumber: "133", message: "133 Neilson to Morningside Heights in {0} min" }
-];
-
-const API_URL = "https://42cummer-transseeapi.hf.space/seek";
+// Configuration is loaded from config.js
+const stopConfigs = TRANSIT_CONFIG.stops;
+const API_URL = TRANSIT_CONFIG.apiUrl;
 
 // Fetch stop information from API
 async function getStopInfo(stopId) {
@@ -189,6 +181,6 @@ async function displayTransitInfo() {
 // Load transit info on page load
 displayTransitInfo();
 
-// Refresh every 45 seconds
-setInterval(displayTransitInfo, 45000);
+// Refresh at configured interval
+setInterval(displayTransitInfo, TRANSIT_CONFIG.refreshInterval);
 

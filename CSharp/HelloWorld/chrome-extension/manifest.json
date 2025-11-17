@@ -22,6 +22,7 @@
             "resources": [
                 "popup.html",
                 "transit.js",
+                "config.js",
                 "content.css"
             ],
             "matches": [

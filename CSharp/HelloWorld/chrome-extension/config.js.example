@@ -1,0 +1,10 @@
+// Transit stop configurations
+// Copy this file to config.js and update the values
+const TRANSIT_CONFIG = {
+    stops: [
+        { stopId: 1234, routeNumber: "302", message: "Markham Road Blue Night" },
+    ],
+    apiUrl: "https://42cummer-transseeapi.hf.space/seek",
+    refreshInterval: 45000 // 45 seconds
+};
+
