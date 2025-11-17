@@ -19,11 +19,11 @@ namespace HelloWorld
         static async Task Main(string[] args)
         {
             // Segment Display (commented out)
-            // var display = new SegmentDisplay16();
-            // string text = "0123456789";
-            // display.DisplayText(text);
+            var display = new SegmentDisplay16();
+            string text = "LM";
+            display.DisplayText(text);
 
-            if (args.Length == 0)
+            /*if (args.Length == 0)
             {
                 Console.WriteLine("Usage: dotnet run <stop_id>");
                 Console.WriteLine("Example: dotnet run 12345");
@@ -49,7 +49,7 @@ namespace HelloWorld
                 Console.WriteLine("Failed to get data from API.");
             }
 
-            apiService.Dispose();
+            apiService.Dispose();*/
         }
     }
 
