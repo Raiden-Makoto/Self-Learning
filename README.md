@@ -1,17 +1,17 @@
 # Self-Learning
-I'm kinda stupid and NPC so I'm improving my overall SWE skills, learning new skills, frameworks, and languages.   
-This is a collection of all the projects that I have worked on in applying the skills I have learned.    
+Collection of miscellaneous projects I completed as I learn new languages and frameworks.   
+You can learn more about them by navigating to any subfolder and inspecting the `readme`.
 
-## Skills & Frameworks & Languages I Have Learned
-- basic game development in C++ and raylib
-- Google BigQuery for data analytics and BQML for machine learning using SQL (!!), basic data visualization using Looker Studio
+## Skills & Frameworks & Languages 
+- Basic minigame development in C++ and raylib
+- Google BigQuery for data analytics and BQML for machine learning using SQL; basic data visualization using Looker Studio
+- Introductory C# and backend development with C# (simple API calls)
+- R for statistical analysis and simple machine learning (integration with Keras)
 
 ## Things I am Learning
-- C# (just for fun)
 - Amazon S3
-- Java Spring Boot
+- Docker and Kubernetes (starting soon hopefully)
 
 ## Bucket List
-- Learn Docker and Kubernetes
-- Learn Amazon EC2 and Lambda
-- Learn F# (i heard it's good for data science?)
+- Amazon EC2 and Lambda for Cloud Computing
+- Rust for Machine Learning on Mac (integration with MLX)
