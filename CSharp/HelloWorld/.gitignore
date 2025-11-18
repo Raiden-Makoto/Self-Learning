@@ -4,6 +4,9 @@
 # Chrome extension config (contains sensitive stop IDs)
 chrome-extension/config.js
 
+# macOS
+.DS_Store
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
