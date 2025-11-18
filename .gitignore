@@ -90,6 +90,12 @@ yarn.lock
 **/jena_climate_*.csv
 **/jena_climate_*.zip
 
+# Model weights
+*.h5
+*.hdf5
+model.weights.h5
+**/model.weights.h5
+
 # Chrome extension config (contains sensitive stop IDs)
 **/chrome-extension/config.js
 !**/chrome-extension/config.js.example
