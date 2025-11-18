@@ -42,4 +42,4 @@ features.index = df["Date Time"]
 features = normalize(features.values, train_split)
 features = pd.DataFrame(features)
 
-df.to_csv("jena_climate_2009_2016.csv", index=False)
+features.to_csv("jena_climate_2009_2016.csv", index=False)
